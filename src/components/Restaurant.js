@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stars } from './Stars'
+import { Stars } from './Stars';
 import { averageRatings } from './lib';
 import clsx from 'clsx';
 import AddReview from './AddReview';
@@ -64,7 +64,6 @@ function Restaurant(props) {
        setExpanded(!expanded);
      }
 
-
         return (
           <div>
             <Card className={classes.card}>
@@ -90,12 +89,13 @@ function Restaurant(props) {
                 </div>
                 </CardContent>
                 <CardActions>
-                  <Button variant="outlined" color="primary" className={clsx(classes.expand, {
-                       [classes.expandOpen]: expanded,
-                     })}
-                     onClick={handleExpandClick}
-                     aria-expanded={expanded}
-                     aria-label="Reviews">Ratings
+                  <Button variant="outlined" color="primary"
+                          className={clsx(classes.expand, {
+                            [classes.expandOpen]: expanded,
+                            })}
+                          onClick={handleExpandClick}
+                          aria-expanded={expanded}
+                          aria-label="Reviews">Ratings
                    </Button>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
