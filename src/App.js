@@ -23,7 +23,7 @@ class App extends Component {
             newRestaurantLocation: {},
             displayGooglePlaces: true,
             googlePlaces: [],
-            nearbyGooglePlaces: []
+
 
         };
 
@@ -76,8 +76,8 @@ class App extends Component {
         let currentLocation;
         let service;
         let request;
-        let placesInfo;
-        let finalPlace;
+    
+
         try {
             currentLocation = new window.google.maps.LatLng(lat, lng);
             request = {
@@ -103,6 +103,7 @@ class App extends Component {
                 let ro = {}; // restaurant object
                 // convert google place to the restaurant format
                 ro.key=r.id;
+                ro.id=r.id;
                 ro.isGooglePlaces=true;
                 ro.name=r.name;
                 ro.rating=r.rating;

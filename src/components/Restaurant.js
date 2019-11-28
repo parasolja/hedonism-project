@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles (theme => ({
   card: {
-    minWidth: 275,
+    minWidth: 200,
   },
   title: {
     fontSize: 14,
@@ -34,7 +34,6 @@ const useStyles = makeStyles (theme => ({
 }));
 
 function Restaurant(props) {
-  const { lat, lng, name, address } = props.restaurant;
   const [review, rating] = useState('');
   let avgRtg = averageRatings(props.restaurant);
   let comments = props.restaurant.ratings.map (function(ratings){
@@ -65,7 +64,8 @@ function Restaurant(props) {
      }
 
         return (
-          <div>
+
+
             <Card className={classes.card}>
               <CardContent>
 
@@ -75,7 +75,8 @@ function Restaurant(props) {
                 }
                 <h4>{props.restaurant.name}</h4>
                 <Typography variant="body2" component="p">{props.restaurant.address}</Typography>
-                <div style={{ color:'#EC9720' }}>
+
+
                     <span style={{ display: 'inline-block', width: '1.5rem' }} className="mr-1">{avgRtg}
                     </span>
                     <span className="mr-1" key={props.restaurant.id}><Stars rating={avgRtg}/></span>
@@ -86,29 +87,29 @@ function Restaurant(props) {
                             props.restaurant.user_ratings_total}
                         )
                     </span>
-                </div>
+
                 </CardContent>
                 <CardActions>
-                  <Button variant="outlined" color="primary"
+                  <Button onClick={handleExpandClick}
+                          variant="outlined" color="primary"
                           className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
                             })}
-                          onClick={handleExpandClick}
                           aria-expanded={expanded}
                           aria-label="Reviews">Ratings
                    </Button>
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                    <CardContent>
-                <div>
+
                   <Typography paragraph>{comments}</Typography>
-                </div>
+
                 <AddReview id={props.restaurant.id} onAddReview={handleAddReview} />
 
                   </CardContent>
                   </Collapse>
               </Card>
-            </div>
+
         );
     }
 

@@ -66,6 +66,7 @@ export default class RestaurantMarker extends React.Component {
         iwElements.push(<div className="text-left"> {
                           '' + restaurant.ratings[i].comment + ''
                           } </div>);
+
       }
     }
 

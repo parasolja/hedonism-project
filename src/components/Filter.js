@@ -10,11 +10,13 @@ class Filter extends Component {
         this.state = {
            min: 0,
            max: 5,
+           displayGooglePlaces: true,
            className:"d-none d-md-block"
         }
 
         this.minHandleChange = this.minHandleChange.bind(this);
         this.maxHandleChange = this.maxHandleChange.bind(this);
+        this.toggleGooglePlaces = this.toggleGooglePlaces.bind(this);
         this.hideShowFilter = this.hideShowFilter.bind(this);
     }
 
@@ -57,6 +59,16 @@ class Filter extends Component {
              });
     }
 
+    toggleGooglePlaces(e) {
+       const value = e.target.checked;
+       this.setState((prevState) => {
+           this.props.onFilter({
+               displayGooglePlaces: value
+             });
+           return {displayGooglePlaces: value}
+            });
+     }
+
     render() {
         return (<div id="filter" className="d-flex alçign-items-baseline">
                         <div className="btn btn-light"
@@ -91,6 +103,13 @@ class Filter extends Component {
                                         </select>
                                     </label>
                                 </div>
+                                <div className="form-group ml-3">
+                                   <input type="checkbox"
+                                       name="CBtoggleGP"
+                                       checked={this.state.displayGooglePlaces}
+                                       onChange={this.toggleGooglePlaces}/>
+                                   <label className="ml-1">Google Places</label>
+                               </div>
                             </div>
                         </form>
                 </div> );

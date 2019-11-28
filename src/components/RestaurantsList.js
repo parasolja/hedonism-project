@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import Restaurant from './Restaurant';
 
-class RestaurantsLists extends Component {
+class RestaurantsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -67,4 +67,4 @@ class RestaurantsLists extends Component {
     }
 }
 
-export default RestaurantsLists;
+export default RestaurantsList;
