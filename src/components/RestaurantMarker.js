@@ -6,7 +6,7 @@ import React from 'react';
 import { Marker, InfoWindow } from 'react-google-maps';
 import logo from './img/Icon.png';
 import { Stars } from './Stars';
-// import food from './img/food.png';
+
 
 
 export default class RestaurantMarker extends React.Component {

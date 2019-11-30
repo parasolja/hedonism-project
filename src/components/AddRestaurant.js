@@ -3,6 +3,15 @@
  */
 
 import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+
+
 
 const RESET_VALUES = {id: '', name: '', address: '', isGooglePlaces: false,
         lat: '', lng: '', ratings: [{stars:'Choose Rating...', comment:''}]};
@@ -21,6 +30,7 @@ class AddRestaurant extends Component {
         this.handleReviewChange = this.handleReviewChange.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.addRestaurantCard = this.addRestaurantCard.bind(this);
     }
 
     //hand editing form input
@@ -101,16 +111,58 @@ class AddRestaurant extends Component {
           );
     }
 
+  addRestaurantCard(){
+    const useStyles = makeStyles(theme => ({
+      card: {
+        minWidth: 275,
+      },
+      bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+      },
+      title: {
+        fontSize: 14,
+      },
+      pos: {
+        marginBottom: 12,
+      },
+      container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+      textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+      },
+    }));
+    const classes = useStyles();
+
+  }
+
     render() {
+
         return (
+          <Card className={this.card}>
+          <CardContent>
             <div id="add-restaurant" >
-                <h5 className="text-left">Add New Restaurant</h5>
+                <Typography className={this.title} color="textSecondary" gutterBottom>Add New Restaurant</Typography>
                 <form className="mt-3" onSubmit={this.handleSubmit}>
+                <form className={this.container} noValidate autoComplete="off">
                     <div className="form-group">
-                        <input type="text" className="form-control"
-                            id="name" name="name"  value={this.state.restaurant.name}
-                            onChange={this.handleChange}
-                            placeholder="Restaurant Name"/>
+                    <TextField
+                          required
+                          id="outlined-required"
+                          name="name"
+                          label="Name"
+                          defaultValue="Hello World"
+                          className={this.textField}
+                          value={this.state.restaurant.name}
+                          onChange={this.handleChange}
+                          margin="normal"
+                          variant="outlined"
+                      />
                         <div className="text-left" >
                             <small style={{color: "red"}}>
                                 {this.state.errors["name"]}
@@ -118,11 +170,19 @@ class AddRestaurant extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <textarea className="form-control"
-                            name="address"  value={this.state.restaurant.address}
-                            onChange={this.handleChange}
-                            placeholder="Restaurant Address" rows="2">
-                        </textarea>
+                    <TextField
+                          required
+                          id="outlined-basic"
+                          name="address"
+                          variant="outlined"
+                          label="Address"
+                          defaultValue="Hello World"
+                          className={this.textField}
+                          value={this.state.restaurant.address}
+                          onChange={this.handleChange}
+                          margin="normal"
+                      />
+
                         <div className="text-left" >
                             <small style={{color: "red"}}>
                                 {this.state.errors["address"]}
@@ -146,17 +206,37 @@ class AddRestaurant extends Component {
                         </div>
                 </div>
                 <div className="form-group mb-4">
-                    <textarea  className="form-control" placeholder="Please write your feedback." value={this.state.restaurant.ratings[0].comment} onChange={this.handleReviewChange} />
+                <TextField
+                      required
+                      id="outlined-basic"
+                      name="address"
+                      variant="outlined"
+                      label="Your feedback"
+                      defaultValue="Hello World"
+                      className={this.textField}
+                      value={this.state.restaurant.ratings[0].comment}
+                      onChange={this.handleReviewChange}
+                      margin="normal"
+                  />
                     <div className="text-left" >
                         <small className="text-left" style={{color: "red"}}>
                         {this.state.errors["comment"]}
                         </small>
                     </div>
                 </div>
-                    <input  className="form-control btn btn-primary btn-sm mb-2"  type="submit"
-                    value="Submit" />
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  type="submit"
+                  value="Submit"
+                  onClick>Submit
+                </Button>
+
+                </form>
                 </form>
             </div>
+            </CardContent>
+            </Card>
         );
     }
 }

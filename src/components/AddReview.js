@@ -3,6 +3,11 @@ import React, { useState, setState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 
@@ -25,6 +30,10 @@ const AddReview = (props) => {
     review, rating, handleReviewChange, handleRatingChange
   }, setState ] = useState(initialState);
 
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+
+
   const clearState = () => {
     setState({ ...initialState });
   };
@@ -43,11 +52,7 @@ const AddReview = (props) => {
           review: review,
           rating: rating
       });
-
-
-
 }
-
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,22 +62,39 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 110,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 const classes = useStyles();
 
         return (
-            <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-                <div className="form-group mb-1">
-                    <select className="custom-select" id="Rating" name="rating"  value={rating} onChange={onChange}>
-                        <option value="Choose Rating...">Choose Rating...</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
+          <div>
+            <form className={classes.root}
+                  noValidate autoComplete="off"
+                  onSubmit={handleSubmit}>
+                <div>
+                    <FormControl className={classes.root} onSubmit={handleSubmit} >
+                      <InputLabel id="demo-simple-select-label">Add your rating...</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="Rating"
+                        name='rating'
+                        value={rating}
+                        onChange={onChange}
+                      >
+                          <MenuItem value='1'>1</MenuItem>
+                          <MenuItem value='2'>2</MenuItem>
+                          <MenuItem value='3'>3</MenuItem>
+                          <MenuItem value='4'>4</MenuItem>
+                          <MenuItem value='5'>5</MenuItem>
+                      </Select>
+                    </FormControl>
                 </div>
                 <div className="form-group">
                     <TextField
@@ -93,8 +115,9 @@ const classes = useStyles();
                   onClick>Submit
                 </Button>
             </form>
+          </div>
         );
 
     };
 
-    export default AddReview
+export default AddReview

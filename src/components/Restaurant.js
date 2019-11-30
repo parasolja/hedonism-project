@@ -104,6 +104,7 @@ function Restaurant(props) {
 
                   <Typography paragraph>{comments}</Typography>
 
+
                 <AddReview id={props.restaurant.id} onAddReview={handleAddReview} />
 
                   </CardContent>

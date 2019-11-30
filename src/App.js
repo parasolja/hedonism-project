@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 
 import MapContainer from './components/MapContainer';
-import {withGoogleMap, withScriptjs, GoogleMap, Marker}
-    from 'react-google-maps';
-import {compose, withProps, withHandlers, withState} from 'recompose';
 import RestaurantsList from './components/RestaurantsList';
 import Filter from './components/Filter';
 import AddRestaurant from './components/AddRestaurant';
@@ -76,7 +73,7 @@ class App extends Component {
         let currentLocation;
         let service;
         let request;
-    
+
 
         try {
             currentLocation = new window.google.maps.LatLng(lat, lng);
@@ -100,18 +97,20 @@ class App extends Component {
             for (let i = 0; i < results.length; i++) {
                 const jsonp = JSON.stringify(results[i]);
                 const r = JSON.parse(jsonp); // read the google place json
-                let ro = {}; // restaurant object
+                let ro = { // restaurant object
                 // convert google place to the restaurant format
-                ro.key=r.id;
-                ro.id=r.id;
-                ro.isGooglePlaces=true;
-                ro.name=r.name;
-                ro.rating=r.rating;
-                ro.user_ratings_total=r.user_ratings_total;
-                ro.address=r.vicinity;
-                ro.lat=r.geometry.location.lat;
-                ro.lng=r.geometry.location.lng;
-                ro.ratings=[{stars: r.rating, comment: ''}];
+                key: r.id,
+                id: r.id,
+                isGooglePlaces: true,
+                name: r.name,
+                rating: r.rating,
+                user_ratings_total: r.user_ratings_total,
+                address: r.vicinity,
+                lat: r.geometry.location.lat,
+                lng: r.geometry.location.lng,
+                ratings: [{stars:r.rating}],
+                
+              };
                 restaurants.push(ro);
                 this.handleAddGooglePlaces(ro);
             }
