@@ -8,6 +8,7 @@ import {averageRatings, find} from './components/lib';
 import restaurants from './components/restaurants';
 
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -109,7 +110,7 @@ class App extends Component {
                 lat: r.geometry.location.lat,
                 lng: r.geometry.location.lng,
                 ratings: [{stars:r.rating}],
-                
+
               };
                 restaurants.push(ro);
                 this.handleAddGooglePlaces(ro);

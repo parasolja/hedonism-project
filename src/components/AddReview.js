@@ -32,6 +32,9 @@ const AddReview = (props) => {
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
 
 
   const clearState = () => {
@@ -59,12 +62,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: 200,
+      width: 400,
     },
   },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 110,
+    minWidth: 400,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -79,8 +81,8 @@ const classes = useStyles();
                   noValidate autoComplete="off"
                   onSubmit={handleSubmit}>
                 <div>
-                    <FormControl className={classes.root} onSubmit={handleSubmit} >
-                      <InputLabel id="demo-simple-select-label">Add your rating...</InputLabel>
+                    <FormControl variant="outlined" className={classes.root} onSubmit={handleSubmit} >
+                      <InputLabel ref={inputLabel} id="outlined-basic">Add your rating...</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="Rating"
@@ -96,24 +98,25 @@ const classes = useStyles();
                       </Select>
                     </FormControl>
                 </div>
-                <div className="form-group">
+                <div className={classes.root}>
                     <TextField
-                      id="outlined-basic"
+                      id="outlined-multiline"
                       label="Your feedback"
+                      multiline
+                      rows="4"
                       variant="outlined"
                       name='review'
                       value={review}
                       onChange={onChange}
                       />
-
-                </div>
                 <Button
-                  variant="outlined"
-                  color="primary"
+                  variant="contained"
+                  color="secondary"
                   type="submit"
                   value="Submit Review"
                   onClick>Submit
                 </Button>
+                </div>
             </form>
           </div>
         );

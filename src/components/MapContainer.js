@@ -11,6 +11,7 @@ const RestaurantsMap = withGoogleMap((props) => {
         const markers = restaurants.map( restaurant =>
             <RestaurantMarker
                 key={restaurant.id}
+                id={restaurant.id}
                 restaurant={restaurant}
                 icon={{
                     url: logo,
@@ -25,6 +26,7 @@ const RestaurantsMap = withGoogleMap((props) => {
         const googlePlaceMarkers = props.googlePlaces.map( googlePlaceNearby  =>
             <RestaurantMarker
                 key={googlePlaceNearby.key}
+                id={googlePlaceNearby.id}
                 restaurant={googlePlaceNearby}
                 icon={{
                     url: food,

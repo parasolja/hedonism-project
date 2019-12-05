@@ -34,7 +34,6 @@ const useStyles = makeStyles (theme => ({
 }));
 
 function Restaurant(props) {
-  const [review, rating] = useState('');
   let avgRtg = averageRatings(props.restaurant);
   let comments = props.restaurant.ratings.map (function(ratings){
     return(<div>

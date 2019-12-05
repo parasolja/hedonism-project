@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import Restaurant from './Restaurant';
 
+
 class RestaurantsList extends Component {
     constructor(props) {
         super(props);
@@ -41,6 +42,7 @@ class RestaurantsList extends Component {
         this.props.onAddReview(input);
     }
 
+
     render() {
         return (
             <div>
@@ -58,7 +60,7 @@ class RestaurantsList extends Component {
                     <ul style={{display:this.state.display}} >
                         {this.props.restaurants.sort(this.compare)
                             .map(
-                                (item) =>  <Restaurant key={item.id} restaurant={item} onAddReview={this.handleAddReview} />
+                                (item) =>  <Restaurant key={item.id} id={item.id}restaurant={item} onAddReview={this.handleAddReview} />
                             )}
                     </ul>
                 </div>

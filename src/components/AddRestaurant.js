@@ -77,7 +77,7 @@ class AddRestaurant extends Component {
 
         if(restaurant.ratings[0].comment === ''){
           formIsValid = false;
-          errors.comment = "Product price cannot be empty";//display error
+          errors.comment = "Comment cannot be empty";//display error
         }
 
         if(restaurant.ratings[0].stars === 'Choose Rating...'){
@@ -116,13 +116,9 @@ class AddRestaurant extends Component {
       card: {
         minWidth: 275,
       },
-      bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-      },
       title: {
-        fontSize: 14,
+        fontSize: 16,
+
       },
       pos: {
         marginBottom: 12,
@@ -146,8 +142,8 @@ class AddRestaurant extends Component {
         return (
           <Card className={this.card}>
           <CardContent>
-            <div id="add-restaurant" >
-                <Typography className={this.title} color="textSecondary" gutterBottom>Add New Restaurant</Typography>
+            <div id="add-restaurant">
+                <Typography className={this.title} color="textSecondary">Add New Restaurant</Typography>
                 <form className="mt-3" onSubmit={this.handleSubmit}>
                 <form className={this.container} noValidate autoComplete="off">
                     <div className="form-group">
@@ -156,7 +152,6 @@ class AddRestaurant extends Component {
                           id="outlined-required"
                           name="name"
                           label="Name"
-                          defaultValue="Hello World"
                           className={this.textField}
                           value={this.state.restaurant.name}
                           onChange={this.handleChange}
