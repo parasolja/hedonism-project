@@ -1,15 +1,12 @@
-/*
- * Component to add new restaurant
- */
-
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 
@@ -23,7 +20,6 @@ class AddRestaurant extends Component {
             restaurant: Object.assign({}, RESET_VALUES),
             errors: {},
         };
-        console.log("inside constructor:")
         console.log(this.state.restaurant);
 
         this.handleChange = this.handleChange.bind(this);
@@ -113,12 +109,14 @@ class AddRestaurant extends Component {
 
   addRestaurantCard(){
     const useStyles = makeStyles(theme => ({
-      card: {
-        minWidth: 275,
+      root: {
+        '& > *': {
+          margin: theme.spacing(0),
+          width: 400,
+        },
       },
       title: {
         fontSize: 16,
-
       },
       pos: {
         marginBottom: 12,
@@ -134,19 +132,17 @@ class AddRestaurant extends Component {
       },
     }));
     const classes = useStyles();
+    const inputLabel = React.useRef(null);
 
   }
 
     render() {
 
         return (
-          <Card className={this.card}>
-          <CardContent>
             <div id="add-restaurant">
                 <Typography className={this.title} color="textSecondary">Add New Restaurant</Typography>
-                <form className="mt-3" onSubmit={this.handleSubmit}>
-                <form className={this.container} noValidate autoComplete="off">
-                    <div className="form-group">
+                <form className={this.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+                    <div>
                     <TextField
                           required
                           id="outlined-required"
@@ -157,12 +153,9 @@ class AddRestaurant extends Component {
                           onChange={this.handleChange}
                           margin="normal"
                           variant="outlined"
+                          error={this.state.errors["name"]}
                       />
-                        <div className="text-left" >
-                            <small style={{color: "red"}}>
-                                {this.state.errors["name"]}
-                            </small>
-                        </div>
+
                     </div>
                     <div className="form-group">
                     <TextField
@@ -176,30 +169,30 @@ class AddRestaurant extends Component {
                           value={this.state.restaurant.address}
                           onChange={this.handleChange}
                           margin="normal"
+                          error={this.state.errors["address"]}
                       />
-
-                        <div className="text-left" >
-                            <small style={{color: "red"}}>
-                                {this.state.errors["address"]}
-                            </small>
-                        </div>
                     </div>
-                    <div className="form-group">
-                        <select className="custom-select" name="rating"  value={this.state.restaurant.ratings[0].stars} onChange={this.handleRatingChange}>
-                            <option value="Choose Rating...">Choose Rating...</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <div className="text-left" >
-                            <small className="text-left" style={{color: "red"}}>
-                            {this.state.errors["rating"]}
-                            </small>
+                    <div>
+                        <FormControl variant="outlined" className={this.root}>
+                          <InputLabel ref={this.inputLabel} id="outlined-basic">Your rating</InputLabel>
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="Rating"
+                              style={{minWidth: 200}}
+                              name='rating'
+                              value={this.state.restaurant.ratings[0].stars}
+                              onChange={this.handleRatingChange}
+                              error={this.state.errors["rating"]}
+                            >
+                                <MenuItem value='1'>1</MenuItem>
+                                <MenuItem value='2'>2</MenuItem>
+                                <MenuItem value='3'>3</MenuItem>
+                                <MenuItem value='4'>4</MenuItem>
+                                <MenuItem value='5'>5</MenuItem>
+                            </Select>
+                        </FormControl>
                         </div>
-                </div>
+
                 <div className="form-group mb-4">
                 <TextField
                       required
@@ -212,12 +205,8 @@ class AddRestaurant extends Component {
                       value={this.state.restaurant.ratings[0].comment}
                       onChange={this.handleReviewChange}
                       margin="normal"
+                      error={this.state.errors["comment"]}
                   />
-                    <div className="text-left" >
-                        <small className="text-left" style={{color: "red"}}>
-                        {this.state.errors["comment"]}
-                        </small>
-                    </div>
                 </div>
                 <Button
                   variant="outlined"
@@ -226,12 +215,9 @@ class AddRestaurant extends Component {
                   value="Submit"
                   onClick>Submit
                 </Button>
-
-                </form>
                 </form>
             </div>
-            </CardContent>
-            </Card>
+
         );
     }
 }

@@ -36,14 +36,19 @@ const useStyles = makeStyles (theme => ({
 function Restaurant(props) {
   let avgRtg = averageRatings(props.restaurant);
   let comments = props.restaurant.ratings.map (function(ratings){
-    return(<div>
-              <Stars
-                 rating={ratings.stars}
-                 className="fas fa-star"
-                 numberOfStars={5}
-                 name='rating'
-              />
-              <Typography variant="body2" component="p">{ratings.comment}
+    return(<div key='key'>
+              <span style={{color:"#EC9720"}}>
+                <Stars
+                   rating={ratings.stars}
+                   className="fas fa-star"
+                   numberOfStars={5}
+                   name='rating'
+                   key='key'
+                />
+              </span>
+              <Typography variant="body2"
+                          component="p">
+                {ratings.comment}
               </Typography>
             </div>);
   });
@@ -64,7 +69,6 @@ function Restaurant(props) {
 
         return (
 
-
             <Card className={classes.card}>
               <CardContent>
 
@@ -72,13 +76,19 @@ function Restaurant(props) {
                     props.restaurant.isGooglePlaces &&
                     <small className="google-places">Google Places</small>
                 }
-                <h4>{props.restaurant.name}</h4>
-                <Typography variant="body2" component="p">{props.restaurant.address}</Typography>
+                  <h4>{props.restaurant.name}</h4>
+                          <Typography variant="body2"
+                            component="p">{props.restaurant.address}
+                            </Typography>
 
 
-                    <span style={{ display: 'inline-block', width: '1.5rem' }} className="mr-1">{avgRtg}
+                    <span style={{ display: 'inline-block', width: '25px' }}
+                          className="mr-1">{avgRtg}
                     </span>
-                    <span className="mr-1" key={props.restaurant.id}><Stars rating={avgRtg}/></span>
+                    <span className="mr-1"
+                          key={props.restaurant.id}
+                          style={{color:"#EC9720"}}>
+                            <Stars rating={avgRtg}/></span>
                     <span>
                         ({!props.restaurant.isGooglePlaces &&
                             props.restaurant.ratings.length}
@@ -98,16 +108,14 @@ function Restaurant(props) {
                           aria-label="Reviews">Ratings
                    </Button>
                 </CardActions>
-                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                  <Collapse in={expanded}
+                          timeout="auto"
+                          unmountOnExit>
                    <CardContent>
-
-                  <Typography paragraph>{comments}</Typography>
-
-
-                <AddReview id={props.restaurant.id} onAddReview={handleAddReview} />
-
+                    <Typography paragraph>{comments}</Typography>
+                    <AddReview id={props.restaurant.id} onAddReview={handleAddReview} />
                   </CardContent>
-                  </Collapse>
+                </Collapse>
               </Card>
 
         );

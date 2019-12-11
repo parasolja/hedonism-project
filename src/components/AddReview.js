@@ -1,11 +1,10 @@
 
-import React, { useState, setState } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -19,7 +18,6 @@ function NewReview() {
 const initialState = {
   review: '',
   rating: '',
-  handleReviewChange: '',
   handleReviewChange: ''
 };
 
@@ -31,10 +29,7 @@ const AddReview = (props) => {
   }, setState ] = useState(initialState);
 
   const inputLabel = React.useRef(null);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current.offsetWidth);
-  }, []);
+
 
 
   const clearState = () => {
@@ -55,13 +50,14 @@ const AddReview = (props) => {
           review: review,
           rating: rating
       });
-}
+};
+
 
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
+      margin: theme.spacing(0),
       width: 400,
     },
   },
@@ -101,7 +97,7 @@ const classes = useStyles();
                 <div className={classes.root}>
                     <TextField
                       id="outlined-multiline"
-                      label="Your feedback"
+                      label="Share your opinion"
                       multiline
                       rows="4"
                       variant="outlined"
@@ -109,13 +105,13 @@ const classes = useStyles();
                       value={review}
                       onChange={onChange}
                       />
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  type="submit"
-                  value="Submit Review"
-                  onClick>Submit
-                </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                    value="Submit Review"
+                    onClick>Submit
+                  </Button>
                 </div>
             </form>
           </div>

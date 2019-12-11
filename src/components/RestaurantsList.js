@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import Restaurant from './Restaurant';
+import Typography from '@material-ui/core/Typography';
 
 
 class RestaurantsList extends Component {
@@ -48,9 +49,9 @@ class RestaurantsList extends Component {
             <div>
                 <div id="restaurants-list">
                     <div className="d-flex justify-content-between align-items-center">
-                        <div className="text-left">
-                            <h5>Restaurants</h5>
-                        </div>
+                         <Typography variant="h5" gutterBottom>
+                            <h6>Restaurants</h6>
+                        </Typography>
 
                         <div className="btn btn-light"
                             onClick={this.hideShowList}>

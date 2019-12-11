@@ -68,7 +68,7 @@ h6 {
   top: 185px;
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-  z-index: 11000;
+
 }
 
 .btn-primary{
@@ -94,7 +94,7 @@ h6 {
   position: sticky;
   background-color: white;
   top: 0;
-  z-index: 10000;
+
 }
 
 
