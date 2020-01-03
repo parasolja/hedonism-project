@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -8,10 +9,24 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-
+const styles = theme => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(0),
+      width: 200,
+    },
+  },
+  title: {
+    fontSize: 16,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
 
 const RESET_VALUES = {id: '', name: '', address: '', isGooglePlaces: false,
-        lat: '', lng: '', ratings: [{stars:'Choose Rating...', comment:''}]};
+        lat: '', lng: '', ratings: [{stars:'', comment:''}]};
+
 
 class AddRestaurant extends Component {
     constructor(props) {
@@ -26,7 +41,7 @@ class AddRestaurant extends Component {
         this.handleReviewChange = this.handleReviewChange.bind(this);
         this.handleRatingChange = this.handleRatingChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.addRestaurantCard = this.addRestaurantCard.bind(this);
+
     }
 
     //hand editing form input
@@ -73,10 +88,10 @@ class AddRestaurant extends Component {
 
         if(restaurant.ratings[0].comment === ''){
           formIsValid = false;
-          errors.comment = "Comment cannot be empty";//display error
+          errors.comment = "review cannot be empty";//display error
         }
 
-        if(restaurant.ratings[0].stars === 'Choose Rating...'){
+        if(restaurant.ratings[0].stars === 'Your rating...'){
             formIsValid = false;
             errors.rating = "Rating cannot be empty";//display error
           }
@@ -99,7 +114,7 @@ class AddRestaurant extends Component {
     //save the location got from Google Maps
     componentDidMount(){
         let restaurant = this.state.restaurant;
-        restaurant.ratings = [{stars:'Choose Rating...',comment:''}]
+        restaurant.ratings = [{stars:'Your rating...', comment:''}]
         restaurant.lat = this.props.location.lat;
         restaurant.lng = this.props.location.lng;
         this.setState(
@@ -107,41 +122,17 @@ class AddRestaurant extends Component {
           );
     }
 
-  addRestaurantCard(){
-    const useStyles = makeStyles(theme => ({
-      root: {
-        '& > *': {
-          margin: theme.spacing(0),
-          width: 400,
-        },
-      },
-      title: {
-        fontSize: 16,
-      },
-      pos: {
-        marginBottom: 12,
-      },
-      container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-      },
-      textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: 200,
-      },
-    }));
-    const classes = useStyles();
-    const inputLabel = React.useRef(null);
 
-  }
+
+
 
     render() {
+      const { classes } = this.props;
 
         return (
             <div id="add-restaurant">
-                <Typography className={this.title} color="textSecondary">Add New Restaurant</Typography>
-                <form className={this.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+                <Typography className={classes.title} color="textPrimary">Add New Restaurant</Typography>
+                <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
                     <div>
                     <TextField
                           required
@@ -157,7 +148,7 @@ class AddRestaurant extends Component {
                       />
 
                     </div>
-                    <div className="form-group">
+                    <div>
                     <TextField
                           required
                           id="outlined-basic"
@@ -173,14 +164,13 @@ class AddRestaurant extends Component {
                       />
                     </div>
                     <div>
-                        <FormControl variant="outlined" className={this.root}>
-                          <InputLabel ref={this.inputLabel} id="outlined-basic">Your rating</InputLabel>
+                        <FormControl variant="outlined" className={classes.root}>
+                          <InputLabel id="outlined-basic">Your rating...</InputLabel>
                             <Select
                               labelId="demo-simple-select-label"
                               id="Rating"
-                              style={{minWidth: 200}}
                               name='rating'
-                              value={this.state.restaurant.ratings[0].stars}
+                              value={this.state.restaurant.ratings.stars}
                               onChange={this.handleRatingChange}
                               error={this.state.errors["rating"]}
                             >
@@ -193,15 +183,15 @@ class AddRestaurant extends Component {
                         </FormControl>
                         </div>
 
-                <div className="form-group mb-4">
+                <div>
                 <TextField
                       required
-                      id="outlined-basic"
-                      name="address"
+                      id="outlined-multiline"
+                      multiline
+                      rows="3"
+                      name="ratings"
                       variant="outlined"
                       label="Your feedback"
-                      defaultValue="Hello World"
-                      className={this.textField}
                       value={this.state.restaurant.ratings[0].comment}
                       onChange={this.handleReviewChange}
                       margin="normal"
@@ -222,4 +212,8 @@ class AddRestaurant extends Component {
     }
 }
 
-export default AddRestaurant;
+AddRestaurant.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles (styles) (AddRestaurant);

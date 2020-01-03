@@ -3,7 +3,7 @@
  */
 
 //function to display StreetView image
-let streetViewLink = function(lat, lng){
+let streetViewLink = function(lat, lng) {
     return '<div><img src="https://maps.googleapis.com/maps/api/streetview?size=240x120&location=' + lat + ',' + lng + '&heading=151.78&pitch=-0.76&key=AIzaSyBD_uTIPdMgOPDnkHHwwn-Izd5BmESpmH0" alt="' + '"></div>';
 }
 
