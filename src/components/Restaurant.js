@@ -68,19 +68,17 @@ function Restaurant(props) {
      }
 
         return (
-
             <Card className={classes.card}>
               <CardContent>
-
                 {
                     props.restaurant.isGooglePlaces &&
                     <small className="google-places">Google Places</small>
                 }
+
                   <h4>{props.restaurant.name}</h4>
                           <Typography variant="body2"
                             component="p">{props.restaurant.address}
                             </Typography>
-
 
                     <span style={{ display: 'inline-block', width: '25px' }}
                           className="mr-1">{avgRtg}
@@ -105,7 +103,7 @@ function Restaurant(props) {
                             [classes.expandOpen]: expanded,
                             })}
                           aria-expanded={expanded}
-                          aria-label="Reviews">Ratings
+                          aria-label="Reviews">View all the reviews
                    </Button>
                 </CardActions>
                   <Collapse in={expanded}

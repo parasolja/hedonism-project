@@ -6,6 +6,7 @@ import Restaurant from './Restaurant';
 import Typography from '@material-ui/core/Typography';
 
 
+
 class RestaurantsList extends Component {
     constructor(props) {
         super(props);
@@ -49,10 +50,9 @@ class RestaurantsList extends Component {
             <div>
                 <div id="restaurants-list">
                     <div className="d-flex justify-content-between align-items-center">
-                         <Typography variant="h5" gutterBottom>
-                            <h6>Restaurants</h6>
+                         <Typography variant="h6" gutterBottom>
+                            Restaurants
                         </Typography>
-
                         <div className="btn btn-light"
                             onClick={this.hideShowList}>
                             <i className="fas fa-list"></i>

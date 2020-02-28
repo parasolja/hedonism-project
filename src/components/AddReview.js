@@ -18,19 +18,17 @@ function NewReview() {
 const initialState = {
   review: '',
   rating: '',
-  handleReviewChange: ''
+  handleReviewChange: '',
 };
 
 const AddReview = (props) => {
 
-  const [errors] = useState({});
   const [{
-    review, rating, handleReviewChange, handleRatingChange
+    review, rating,
   }, setState ] = useState(initialState);
 
+
   const inputLabel = React.useRef(null);
-
-
 
   const clearState = () => {
     setState({ ...initialState });
@@ -52,7 +50,7 @@ const AddReview = (props) => {
       });
 };
 
-
+const validate = review.length > 0 && rating.length > 0;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -96,7 +94,7 @@ const classes = useStyles();
                 </div>
                 <div className={classes.root}>
                     <TextField
-                      id="outlined-multiline"
+                      id="outlined"
                       label="Share your opinion"
                       multiline
                       rows="4"
@@ -106,6 +104,7 @@ const classes = useStyles();
                       onChange={onChange}
                       />
                   <Button
+                    disabled={!validate}
                     variant="contained"
                     color="secondary"
                     type="submit"

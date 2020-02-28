@@ -17,22 +17,7 @@ class Filter extends Component {
         this.minHandleChange = this.minHandleChange.bind(this);
         this.maxHandleChange = this.maxHandleChange.bind(this);
         this.toggleGooglePlaces = this.toggleGooglePlaces.bind(this);
-        this.hideShowFilter = this.hideShowFilter.bind(this);
-    }
 
-    hideShowFilter(){
-        this.setState((prevState)=>{
-                if((prevState.className === "d-none d-md-block")
-                    ||(prevState.className === "d-block")){
-                    return{
-                        className: "d-none"
-                    }
-                }
-                return{
-                    className: "d-block"
-                }
-            }
-        )
     }
 
     //define the min rating for a restaurant to display

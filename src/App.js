@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import MapContainer from './components/MapContainer';
 import RestaurantsList from './components/RestaurantsList';
 import Filter from './components/Filter';
@@ -24,8 +23,6 @@ class App extends Component {
 
 
         };
-
-
 
         this.handleAddGooglePlaces = this.handleAddGooglePlaces.bind(this);
         this.handleFilter = this.handleFilter.bind(this);
@@ -97,19 +94,19 @@ class App extends Component {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
             for (let i = 0; i < results.length; i++) {
                 const jsonp = JSON.stringify(results[i]);
-                const r = JSON.parse(jsonp); // read the google place json
+                const googleRestaurant = JSON.parse(jsonp); // read the google place json
                 let ro = { // restaurant object
                 // convert google place to the restaurant format
-                key: r.id,
-                id: r.id,
+                key: googleRestaurant.id,
+                id: googleRestaurant.id,
                 isGooglePlaces: true,
-                name: r.name,
-                rating: r.rating,
-                user_ratings_total: r.user_ratings_total,
-                address: r.vicinity,
-                lat: r.geometry.location.lat,
-                lng: r.geometry.location.lng,
-                ratings: [{stars:r.rating}],
+                name: googleRestaurant.name,
+                rating: googleRestaurant.rating,
+                user_ratings_total: googleRestaurant.user_ratings_total,
+                address: googleRestaurant.vicinity,
+                lat: googleRestaurant.geometry.location.lat,
+                lng: googleRestaurant.geometry.location.lng,
+                ratings: [{stars: googleRestaurant.rating}],
 
               };
                 restaurants.push(ro);
@@ -129,7 +126,7 @@ class App extends Component {
         const toggleGP = this.state.displayGooglePlaces;
 
         // check the match of restaurant and the filter settings
-        if (toggleGP===true) {
+        if (toggleGP === true) {
             return ((averageRatings(restaurant) >= min)
                 &&(averageRatings(restaurant) <= max));
         }

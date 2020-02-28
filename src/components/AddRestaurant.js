@@ -11,16 +11,20 @@ import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   root: {
-    '& > *': {
-      margin: theme.spacing(0),
-      width: 200,
-    },
+    position: 'absolute',
+    backgroundColor: 'white',
+    padding: 10,
+    width: 200,
+    right: 70,
+    top: 185,
+    marginBottom: 10,
+    borderRadius: 5,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+
   },
-  title: {
-    fontSize: 16,
-  },
-  pos: {
-    marginBottom: 12,
+  outlinedMenu: {
+    width: 200,
+    marginTop: 10,
   },
 });
 
@@ -130,10 +134,10 @@ class AddRestaurant extends Component {
       const { classes } = this.props;
 
         return (
-            <div id="add-restaurant">
-                <Typography className={classes.title} color="textPrimary">Add New Restaurant</Typography>
-                <form className={classes.root} noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-                    <div>
+            <div className={classes.root}>
+                <Typography color="textPrimary">Add New Restaurant</Typography>
+                <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
+
                     <TextField
                           required
                           id="outlined-required"
@@ -146,9 +150,6 @@ class AddRestaurant extends Component {
                           variant="outlined"
                           error={this.state.errors["name"]}
                       />
-
-                    </div>
-                    <div>
                     <TextField
                           required
                           id="outlined-basic"
@@ -162,9 +163,7 @@ class AddRestaurant extends Component {
                           margin="normal"
                           error={this.state.errors["address"]}
                       />
-                    </div>
-                    <div>
-                        <FormControl variant="outlined" className={classes.root}>
+                        <FormControl variant="outlined" className={classes.outlinedMenu}>
                           <InputLabel id="outlined-basic">Your rating...</InputLabel>
                             <Select
                               labelId="demo-simple-select-label"
@@ -181,30 +180,28 @@ class AddRestaurant extends Component {
                                 <MenuItem value='5'>5</MenuItem>
                             </Select>
                         </FormControl>
-                        </div>
 
-                <div>
-                <TextField
-                      required
-                      id="outlined-multiline"
-                      multiline
-                      rows="3"
-                      name="ratings"
-                      variant="outlined"
-                      label="Your feedback"
-                      value={this.state.restaurant.ratings[0].comment}
-                      onChange={this.handleReviewChange}
-                      margin="normal"
-                      error={this.state.errors["comment"]}
-                  />
-                </div>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  type="submit"
-                  value="Submit"
-                  onClick>Submit
-                </Button>
+                      <TextField
+                            required
+                            id="outlined-multiline"
+                            multiline
+                            rows="3"
+                            name="ratings"
+                            variant="outlined"
+                            label="Your feedback"
+                            value={this.state.restaurant.ratings[0].comment}
+                            onChange={this.handleReviewChange}
+                            margin="normal"
+                            error={this.state.errors["comment"]}
+                        />
+
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        type="submit"
+                        value="Submit"
+                        onClick>Submit
+                      </Button>
                 </form>
             </div>
 
