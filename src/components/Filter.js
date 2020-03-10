@@ -16,7 +16,6 @@ class Filter extends Component {
 
         this.minHandleChange = this.minHandleChange.bind(this);
         this.maxHandleChange = this.maxHandleChange.bind(this);
-        this.toggleGooglePlaces = this.toggleGooglePlaces.bind(this);
 
     }
 
@@ -88,13 +87,6 @@ class Filter extends Component {
                                         </select>
                                     </label>
                                 </div>
-                                <div className="form-group ml-3">
-                                   <input type="checkbox"
-                                       name="CBtoggleGP"
-                                       checked={this.state.displayGooglePlaces}
-                                       onChange={this.toggleGooglePlaces}/>
-                                   <label className="ml-1">Google Places</label>
-                               </div>
                             </div>
                         </form>
                 </div> );

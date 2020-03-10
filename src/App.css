@@ -48,6 +48,10 @@
   color: #61dafb;
 }
 
+header {
+  max-height: 600px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -80,19 +84,19 @@ h6 {
 }
 
 #map {
-  width:100%;
+  width:50%;
   height: 95vh;
 }
 
 #restaurants-list {
-  position: absolute;
-  top: 185px;
+  position: right;
+  top: 720px;
   left: 10px;
   padding: 1rem;
   border-radius: 2px;
   width: auto;
   min-width: 300px;
-  max-height: 88vh;
+  max-height: 550px;
   overflow: scroll;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
@@ -127,7 +131,7 @@ h6 {
 }
 
 .google-places {
-  color:#6DDAFB;
+  color: blue;
   border: 1px solid #6DDAFB;
   border-radius: 2px;
   padding: 0 2px;
@@ -135,8 +139,8 @@ h6 {
 
 #filter{
   padding: 10px;
-  position: -webkit-sticky;
-  position: sticky;
+  width: 200px;
+  display: flex;
   background-color: white;
   top: 0;
   z-index: 10000;

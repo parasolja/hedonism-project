@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 
 
+
 class RestaurantsList extends Component {
     constructor(props) {
         super(props);

@@ -5,6 +5,8 @@ import Filter from './components/Filter';
 import AddRestaurant from './components/AddRestaurant';
 import {averageRatings, find} from './components/lib';
 import restaurants from './components/restaurants';
+import StyledSlide from './components/Header';
+import './App.css';
 
 
 
@@ -189,6 +191,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <StyledSlide />
                 <Filter onFilter={this.handleFilter}/>
                 <MapContainer
                     userPosition={this.state.currentPosition}
