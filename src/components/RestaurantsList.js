@@ -1,10 +1,8 @@
 /*
- * Component to display the list of restaurants
+ * List of restaurants
  */
 import React, { Component } from 'react';
 import Restaurant from './Restaurant';
-import Typography from '@material-ui/core/Typography';
-
 
 
 
@@ -13,33 +11,11 @@ class RestaurantsList extends Component {
         super(props);
         this.state = {
             shown: true,
-            display:"block",
-            position: "right"
         }
+
         this.handleAddReview = this.handleAddReview.bind(this);
-        this.hideShowList = this.hideShowList.bind(this);
-
     }
 
-
-
-    //for button show/hide restaurants list
-    hideShowList(){
-        this.setState((prevState)=>{
-            let shown = !prevState.shown;
-            let display = "block";
-            if(shown){
-                display = "block";
-            } else {
-                display = "none";
-            }
-            return{
-                shown: shown,
-                display: display
-            }
-        }
-        )
-    }
 
     handleAddReview(input) {
         this.props.onAddReview(input);
@@ -49,17 +25,13 @@ class RestaurantsList extends Component {
     render() {
         return (
             <div>
-                <div id="restaurants-list">
-                    <div className="d-flex justify-content-between align-items-center">
-                         <Typography variant="h6" gutterBottom>
+                <div className="restaurantList">
+                    <div>
+                         <h2>
                             Restaurants
-                        </Typography>
-                        <div className="btn btn-light"
-                            onClick={this.hideShowList}>
-                            <i className="fas fa-list"></i>
-                        </div>
+                        </h2>
                     </div>
-                    <ul style={{display:this.state.display}} >
+                    <ul>
                         {this.props.restaurants.sort(this.compare)
                             .map(
                                 (item) =>  <Restaurant key={item.id} id={item.id}restaurant={item} onAddReview={this.handleAddReview} />

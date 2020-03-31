@@ -1,8 +1,5 @@
-/*
- * Component to filter restaurants to display
- */
-
 import React, { Component } from 'react';
+
 
 class Filter extends Component {
     constructor(props) {
@@ -11,7 +8,7 @@ class Filter extends Component {
            min: 0,
            max: 5,
            displayGooglePlaces: true,
-           className:"d-none d-md-block"
+
         }
 
         this.minHandleChange = this.minHandleChange.bind(this);
@@ -54,17 +51,11 @@ class Filter extends Component {
      }
 
     render() {
-        return (<div id="filter" className="d-flex alçign-items-baseline">
-                        <div className="btn btn-light"
-                            onClick={this.hideShowFilter}>
-                            <i className="fas fa-filter"></i>
-                        </div>
+        return (<div id="filter">
                         <form className={this.state.className}>
-                            <div className="form-inline ml-3">
-                                <div className="form-group">
-                                    <label className="mr-2">
-                                        Rating From
-                                        <select className="custom-select ml-1" id="startingRating" name="min"  value={this.state.min} onChange={this.minHandleChange}>
+                                    <label>
+                                        Display from
+                                        <select className='select' name="min"  value={this.state.min} onChange={this.minHandleChange}>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -73,11 +64,10 @@ class Filter extends Component {
                                             <option value="5">5</option>
                                         </select>
                                     </label>
-                                </div>
-                                <div className="form-group">
-                                    <label className="mr-2">
+
+                                    <label>
                                         to
-                                        <select className="custom-select ml-1" id="endRating" name="max"  value={this.state.max} onChange={this.maxHandleChange}>
+                                        <select className='select' name="max"  value={this.state.max} onChange={this.maxHandleChange}>
                                             <option value="0">0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -86,8 +76,8 @@ class Filter extends Component {
                                             <option value="5">5</option>
                                         </select>
                                     </label>
-                                </div>
-                            </div>
+
+
                         </form>
                 </div> );
     }

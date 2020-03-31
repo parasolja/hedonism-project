@@ -6,6 +6,7 @@ import homeIcon from './img/homeIcon.png';
 import logo from './img/Icon.png';
 import food from './img/food.png';
 
+
 const RestaurantsMap = withGoogleMap((props) => {
 
         const markers = restaurants.map( restaurant =>
@@ -46,12 +47,14 @@ const RestaurantsMap = withGoogleMap((props) => {
             });
         }
 
+
         return (
+
             <GoogleMap
                 defaultZoom={15}
                 center={ props.userPosition }
                 onClick={(e) => handleClick(e)}
-                googleMapURL= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBD_uTIPdMgOPDnkHHwwn-Izd5BmESpmH0&libraries=geometry,drawing,places"
+
             >
                 <Marker
                     title={"Hi! This is your current location"}
@@ -63,8 +66,8 @@ const RestaurantsMap = withGoogleMap((props) => {
 
                 >
                 </Marker>
-                {markers}
-                {googlePlaceMarkers}
+                  {markers}
+                  {googlePlaceMarkers}
             </GoogleMap>
         );
     }

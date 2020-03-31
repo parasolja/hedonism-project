@@ -15,8 +15,8 @@ const styles = theme => ({
     backgroundColor: 'white',
     padding: 10,
     width: 200,
-    right: 70,
-    top: 185,
+    right: 80,
+    top: 850,
     marginBottom: 10,
     borderRadius: 5,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
@@ -163,7 +163,9 @@ class AddRestaurant extends Component {
                           margin="normal"
                           error={this.state.errors["address"]}
                       />
-                        <FormControl variant="outlined" className={classes.outlinedMenu}>
+                        <FormControl
+                            variant="outlined"
+                            className={classes.outlinedMenu}>
                           <InputLabel id="outlined-basic">Your rating...</InputLabel>
                             <Select
                               labelId="demo-simple-select-label"
@@ -179,7 +181,7 @@ class AddRestaurant extends Component {
                                 <MenuItem value='4'>4</MenuItem>
                                 <MenuItem value='5'>5</MenuItem>
                             </Select>
-                        </FormControl>
+                          </FormControl>
 
                       <TextField
                             required

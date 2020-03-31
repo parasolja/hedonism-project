@@ -5,7 +5,7 @@ import Filter from './components/Filter';
 import AddRestaurant from './components/AddRestaurant';
 import {averageRatings, find} from './components/lib';
 import restaurants from './components/restaurants';
-import StyledSlide from './components/Header';
+import Header from './components/Header';
 import './App.css';
 
 
@@ -22,6 +22,8 @@ class App extends Component {
             newRestaurantLocation: {},
             displayGooglePlaces: true,
             googlePlaces: [],
+            geoLat: null,
+            geoLng: null,
 
 
         };
@@ -36,6 +38,7 @@ class App extends Component {
         this.handleAddRestaurant = this.handleAddRestaurant.bind(this);
         this.fetchGooglePlaces = this.fetchGooglePlaces.bind(this);
         this.getGooglePlaces = this.getGooglePlaces.bind(this);
+
 
     }
 
@@ -56,18 +59,12 @@ class App extends Component {
             navigator.geolocation.getCurrentPosition(
                 (position) => this.getUserPosition(position)
             );
-            // smells like exception handling would be appropriate here
         } else {
-            // think of that scenario: no map and restaurant
-            // data should not be shown in the bar left, an
-            // alert like the one below is to "intrusive" ;)
             alert('Please enable device location, and restart.');
         }
     };
 
     // use Google Place api with nearbySearch
-
-
 
     fetchGooglePlaces(lat, lng) {
         let currentLocation;
@@ -142,7 +139,7 @@ class App extends Component {
         this.setState(filterInput);
     }
 
-    // add new review to a restaurant
+    // add new review
     handleAddReview(input) {
         this.setState((prevState) => {
             const restaurants = this.state.restaurants;
@@ -191,27 +188,31 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <StyledSlide />
+                <Header/>
                 <Filter onFilter={this.handleFilter}/>
-                <MapContainer
-                    userPosition={this.state.currentPosition}
-                    restaurants={this.state.restaurants}
-                    googlePlaces={this.state.googlePlaces}
-                    loadingElement={<div style={{height: `100%`}} />}
-                    containerElement={<div style={{height: `100vh`, width: `100%`}}/>}
-                    mapElement={<div style={{height: `100%`}}/>}
-                    onAddRestaurant={this.handleDisplayAddRestaurant}
-                />
-                {
-                    this.state.displayAddRestaurantForm &&
-                    <AddRestaurant onAddRestaurant={this.handleAddRestaurant}
-                                   location={this.state.newRestaurantLocation}
-                    />
-                }
+                <div className="flex-container">
                 <RestaurantsList
                     restaurants={this.state.restaurants.filter(this.inRange)}
                     onAddReview={this.handleAddReview}
+
                 />
+                  <MapContainer
+                      userPosition={this.state.currentPosition}
+                      restaurants={this.state.restaurants}
+                      googlePlaces={this.state.googlePlaces}
+                      loadingElement={<div style={{height: `100%`}} />}
+                      containerElement={<div style={{height: `1000px`, width: `100%`}}/>}
+                      mapElement={<div style={{height: `100%`}}/>}
+                      onAddRestaurant={this.handleDisplayAddRestaurant}
+                  />
+                  {
+                      this.state.displayAddRestaurantForm &&
+                      <AddRestaurant onAddRestaurant={this.handleAddRestaurant}
+                                     location={this.state.newRestaurantLocation}
+                      />
+                  }
+
+              </div>
             </div>
         );
     }

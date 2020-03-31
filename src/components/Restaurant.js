@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Stars } from './Stars';
 import { averageRatings } from './lib';
 import clsx from 'clsx';
@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles (theme => ({
   card: {
-    minWidth: 200,
+    minWidth: 20,
   },
   title: {
     fontSize: 14,
@@ -34,6 +34,7 @@ const useStyles = makeStyles (theme => ({
 }));
 
 function Restaurant(props) {
+  const {id, lat, lng, name, address} = props.restaurant;
   let avgRtg = averageRatings(props.restaurant);
   let comments = props.restaurant.ratings.map (function(ratings){
     return(<div key='key'>
@@ -62,7 +63,7 @@ function Restaurant(props) {
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
 
- 
+
 
   function handleExpandClick() {
        setExpanded(!expanded);
@@ -73,18 +74,17 @@ function Restaurant(props) {
               <CardContent>
                 {
                     props.restaurant.isGooglePlaces &&
-                    <small className="google-places">Google Places</small>
+                    <small className="googlePlaces">Google Places</small>
                 }
 
-                  <h4>{props.restaurant.name}</h4>
+                  <h4 onClick={() => props.pushRestaurantUp(lat, lng)}>{name}</h4>
                           <Typography variant="body2"
-                            component="p">{props.restaurant.address}
+                            component="p">{address}
                             </Typography>
 
-                    <span style={{ display: 'inline-block', width: '25px' }}
-                          className="mr-1">{avgRtg}
+                    <span style={{ display: 'inline-block', width: '25px' }}>{avgRtg}
                     </span>
-                    <span className="mr-1"
+                    <span
                           key={props.restaurant.id}
                           style={{color:"#EC9720"}}>
                             <Stars rating={avgRtg}/></span>
@@ -104,18 +104,18 @@ function Restaurant(props) {
                             [classes.expandOpen]: expanded,
                             })}
                           aria-expanded={expanded}
-                          aria-label="Reviews">View all the reviews
+                          aria-label="Reviews">Reviews
                    </Button>
                 </CardActions>
                   <Collapse in={expanded}
                           timeout="auto"
                           unmountOnExit>
-                   <CardContent>
+                <CardContent>
                     <Typography paragraph>{comments}</Typography>
-                    <AddReview id={props.restaurant.id} onAddReview={handleAddReview} />
-                  </CardContent>
-                </Collapse>
-              </Card>
+                    <AddReview id={id} onAddReview={handleAddReview} />
+                </CardContent>
+              </Collapse>
+            </Card>
 
         );
     }
