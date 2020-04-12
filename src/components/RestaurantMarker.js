@@ -77,6 +77,7 @@ export default class RestaurantMarker extends React.Component {
     return (
         <Marker
           key={this.props.restaurant.id}
+          id={this.props.restaurant.id}
           position={this.props.position}
           onClick={this.handleToggleOpen}
           icon={{

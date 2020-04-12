@@ -94,8 +94,7 @@ class App extends Component {
             for (let i = 0; i < results.length; i++) {
                 const jsonp = JSON.stringify(results[i]);
                 const googleRestaurant = JSON.parse(jsonp); // read the google place json
-                let ro = { // restaurant object
-                // convert google place to the restaurant format
+                let ro = {
                 key: googleRestaurant.id,
                 id: googleRestaurant.id,
                 isGooglePlaces: true,
@@ -106,6 +105,7 @@ class App extends Component {
                 lat: googleRestaurant.geometry.location.lat,
                 lng: googleRestaurant.geometry.location.lng,
                 ratings: [{stars: googleRestaurant.rating}],
+
 
               };
                 restaurants.push(ro);

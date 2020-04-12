@@ -36,7 +36,7 @@ const useStyles = makeStyles (theme => ({
 function Restaurant(props) {
   const {id, lat, lng, name, address} = props.restaurant;
   let avgRtg = averageRatings(props.restaurant);
-  let comments = props.restaurant.ratings.map (function(ratings){
+  let comments = props.restaurant.ratings.map (function (ratings){
     return(<div key='key'>
               <span style={{color:"#EC9720"}}>
                 <Stars
@@ -77,7 +77,7 @@ function Restaurant(props) {
                     <small className="googlePlaces">Google Places</small>
                 }
 
-                  <h4 onClick={() => props.pushRestaurantUp(lat, lng)}>{name}</h4>
+                  <h4>{name}</h4>
                           <Typography variant="body2"
                             component="p">{address}
                             </Typography>
@@ -87,7 +87,8 @@ function Restaurant(props) {
                     <span
                           key={props.restaurant.id}
                           style={{color:"#EC9720"}}>
-                            <Stars rating={avgRtg}/></span>
+                            <Stars rating={avgRtg} />
+                    </span>
                     <span>
                         ({!props.restaurant.isGooglePlaces &&
                             props.restaurant.ratings.length}
@@ -95,6 +96,8 @@ function Restaurant(props) {
                             props.restaurant.user_ratings_total}
                         )
                     </span>
+
+
 
                 </CardContent>
                 <CardActions>

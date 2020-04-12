@@ -34,7 +34,7 @@ class RestaurantsList extends Component {
                     <ul>
                         {this.props.restaurants.sort(this.compare)
                             .map(
-                                (item) =>  <Restaurant key={item.id} id={item.id}restaurant={item} onAddReview={this.handleAddReview} />
+                                (item) =>  <Restaurant key={item.id} id={item.id} restaurant={item} onAddReview={this.handleAddReview} />
                             )}
                     </ul>
                 </div>
