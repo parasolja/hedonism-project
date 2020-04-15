@@ -81,6 +81,15 @@ class App extends Component {
             };
             service = new window.google.maps.places.PlacesService(document.getElementById('map'));
             service.nearbySearch(request, this.getGooglePlaces);
+            service.getDetails({
+              placeId: 'ChIJAUKRDWz2wokRxngAavG2TD8'
+            }, (place, status) => {
+                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                  console.log(place.reviews);
+                  this.setState({places: place.reviews})
+                }
+              })
+
             console.log('big success');
         } catch (err) {
             console.log('error google places api:');
@@ -95,7 +104,7 @@ class App extends Component {
                 const jsonp = JSON.stringify(results[i]);
                 const googleRestaurant = JSON.parse(jsonp); // read the google place json
                 let ro = {
-                key: googleRestaurant.id,
+                key: googleRestaurant.key,
                 id: googleRestaurant.id,
                 isGooglePlaces: true,
                 name: googleRestaurant.name,
@@ -107,6 +116,7 @@ class App extends Component {
                 ratings: [{stars: googleRestaurant.rating}],
 
 
+
               };
                 restaurants.push(ro);
                 this.handleAddGooglePlaces(ro);
@@ -116,6 +126,11 @@ class App extends Component {
             console.log(window.google.maps.places.PlacesServiceStatus);
         }
     }
+
+
+
+
+
 
     // define if restaurant match the filter
     inRange(restaurant) {
