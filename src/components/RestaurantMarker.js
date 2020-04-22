@@ -2,14 +2,14 @@
  * Component to display restaurant icon on the map
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Marker, InfoWindow } from 'react-google-maps';
 import logo from './img/Icon.png';
 import { Stars } from './Stars';
 
 
 
-export default class RestaurantMarker extends React.Component {
+export default class RestaurantMarker extends Component {
   constructor(props) {
     super(props);
     this.state = {

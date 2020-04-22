@@ -24,6 +24,7 @@ class App extends Component {
             googlePlaces: [],
             geoLat: null,
             geoLng: null,
+            
 
 
         };
@@ -39,8 +40,8 @@ class App extends Component {
         this.fetchGooglePlaces = this.fetchGooglePlaces.bind(this);
         this.getGooglePlaces = this.getGooglePlaces.bind(this);
 
-
     }
+
 
     // save the user location
     getUserPosition(position) {
@@ -52,6 +53,8 @@ class App extends Component {
         this.fetchGooglePlaces(pos.lat, pos.lng);
         this.setState({currentPosition: pos});
     }
+
+
 
     // get user location when app load
     componentDidMount() {
@@ -71,7 +74,6 @@ class App extends Component {
         let service;
         let request;
 
-
         try {
             currentLocation = new window.google.maps.LatLng(lat, lng);
             request = {
@@ -81,14 +83,15 @@ class App extends Component {
             };
             service = new window.google.maps.places.PlacesService(document.getElementById('map'));
             service.nearbySearch(request, this.getGooglePlaces);
-            service.getDetails({
-              placeId: 'ChIJAUKRDWz2wokRxngAavG2TD8'
-            }, (place, status) => {
-                if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-                  console.log(place.reviews);
-                  this.setState({places: place.reviews})
-                }
-              })
+            // service.getDetails({
+            //   placeId: 'ChIJpV48tgoosUcRwD26QHGATCY'
+            // }, (place, status) => {
+            //     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+            //       console.log(place.reviews);
+            //       this.setState({places: place.reviews})
+            //     }
+            // })
+
 
             console.log('big success');
         } catch (err) {
@@ -99,13 +102,17 @@ class App extends Component {
 
     // push the google places restaurants to the restaurants list
     getGooglePlaces(results, status) {
+
+      let ro;
+
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
             for (let i = 0; i < results.length; i++) {
                 const jsonp = JSON.stringify(results[i]);
-                const googleRestaurant = JSON.parse(jsonp); // read the google place json
-                let ro = {
-                key: googleRestaurant.key,
+                let googleRestaurant = JSON.parse(jsonp); // read the google place json
+                ro = {
+                key: googleRestaurant.id,
                 id: googleRestaurant.id,
+                place_id: googleRestaurant.place_id,
                 isGooglePlaces: true,
                 name: googleRestaurant.name,
                 rating: googleRestaurant.rating,
@@ -114,6 +121,7 @@ class App extends Component {
                 lat: googleRestaurant.geometry.location.lat,
                 lng: googleRestaurant.geometry.location.lng,
                 ratings: [{stars: googleRestaurant.rating}],
+                reviews: []
 
 
 
@@ -121,14 +129,13 @@ class App extends Component {
                 restaurants.push(ro);
                 this.handleAddGooglePlaces(ro);
             }
+
+
         } else {
             console.log('request status:');
             console.log(window.google.maps.places.PlacesServiceStatus);
         }
     }
-
-
-
 
 
 
@@ -201,6 +208,7 @@ class App extends Component {
 
 
     render() {
+      // const { places } = this.state;
         return (
             <div className="App">
                 <Header/>
@@ -209,6 +217,13 @@ class App extends Component {
                 <RestaurantsList
                     restaurants={this.state.restaurants.filter(this.inRange)}
                     onAddReview={this.handleAddReview}
+                    // {
+                    // ...places.map((place) => {
+                    //   if(place.rating >= 1){
+                    //     return <p key={place.id}>{place.text}</p>
+                    //   }
+                    // })
+                    // }
 
                 />
                   <MapContainer

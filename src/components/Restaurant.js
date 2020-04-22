@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stars } from './Stars';
+import GoogleReviews from './GoogleReviews';
 import { averageRatings } from './lib';
 import clsx from 'clsx';
 import AddReview from './AddReview';
@@ -34,19 +35,21 @@ const useStyles = makeStyles (theme => ({
 }));
 
 function Restaurant(props) {
-  const {id, lat, lng, name, address} = props.restaurant;
+  const {id, place_id, name, address, key} = props.restaurant;
+
   let avgRtg = averageRatings(props.restaurant);
-  let comments = props.restaurant.ratings.map (function (ratings){
-    return(<div key='key'>
+  let comments = props.restaurant.ratings.map (function (ratings, index){
+    return(<div key={index}>
               <span style={{color:"#EC9720"}}>
                 <Stars
                    rating={ratings.stars}
                    className="fas fa-star"
                    numberOfStars={5}
                    name='rating'
-                   key='key'
+                   key={index}
                 />
               </span>
+
               <Typography variant="body2"
                           component="p">
                 {ratings.comment}
@@ -58,16 +61,17 @@ function Restaurant(props) {
     //restaurant reviewing
   const handleAddReview = input => {
         props.onAddReview(input);
-    }
+  }
 
   const [expanded, setExpanded] = React.useState(false);
   const classes = useStyles();
 
 
-
   function handleExpandClick() {
        setExpanded(!expanded);
-     }
+  }
+
+
 
         return (
             <Card className={classes.card}>
@@ -87,7 +91,9 @@ function Restaurant(props) {
                     <span
                           key={props.restaurant.id}
                           style={{color:"#EC9720"}}>
-                            <Stars rating={avgRtg} />
+                            <Stars
+                              rating={avgRtg}
+                              key={props.restaurant.id} />
                     </span>
                     <span>
                         ({!props.restaurant.isGooglePlaces &&
@@ -115,7 +121,14 @@ function Restaurant(props) {
                           unmountOnExit>
                 <CardContent>
                     <Typography paragraph>{comments}</Typography>
-                    <AddReview id={id} onAddReview={handleAddReview} />
+
+                    {
+                        props.restaurant.isGooglePlaces &&
+                        <GoogleReviews place_id={place_id} key={place_id} />
+                    }
+
+
+                    <AddReview id={id} key={id} onAddReview={handleAddReview} />
                 </CardContent>
               </Collapse>
             </Card>

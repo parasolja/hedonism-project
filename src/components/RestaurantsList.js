@@ -27,14 +27,12 @@ class RestaurantsList extends Component {
             <div>
                 <div className="restaurantList">
                     <div>
-                         <h2>
-                            Restaurants
-                        </h2>
+                         <h2>Restaurants</h2>
                     </div>
                     <ul>
                         {this.props.restaurants.sort(this.compare)
                             .map(
-                                (item) =>  <Restaurant key={item.id} id={item.id} restaurant={item} onAddReview={this.handleAddReview} />
+                                (item) =>  <Restaurant key={item.id} restaurant={item} onAddReview={this.handleAddReview} />
                             )}
                     </ul>
                 </div>
