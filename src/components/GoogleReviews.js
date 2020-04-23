@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, {  Component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { Stars } from './Stars';
 
@@ -11,7 +11,7 @@ export default class GoogleReviews extends Component {
   }
 
   componentDidMount() {
-    let map = new window.google.maps.Map(document.getElementById("map"));
+
     let service = new window.google.maps.places.PlacesService(document.getElementById('map'));
     service.getDetails({
       placeId: this.props.place_id
@@ -27,15 +27,33 @@ export default class GoogleReviews extends Component {
     const { places } = this.state;
     return (
       <div>
-    <p>
       {
         places.map((place) => {
           if(place.rating >= 1){
-            return <p key={place.author_name}>{place.rating}{place.text}</p>
+            return (
+            <div key={place.author_name}>
+            <span style={{color:"#EC9720"}}>
+              <Stars
+                 rating={place.rating}
+                 className="fas fa-star"
+                 numberOfStars={5}
+                 name='rating'
+
+              />
+
+            </span>
+            <Typography variant="body2"
+                        component="p"
+                        style={{paddingBottom:"20px"}}
+            >
+              {place.text}
+            </Typography>
+            </div>
+
+          )
           }
         })
       }
-    </p>
   </div>
 
     );

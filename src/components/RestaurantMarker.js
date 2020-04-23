@@ -54,21 +54,6 @@ export default class RestaurantMarker extends Component {
       }
     }
 
-    if (restaurant.isGooglePlaces && (restaurant.ratings.length > 1))
-    {
-      iwElements.push(<div style={{ color: '#EC9720' }} className="text-left mt-2">
-                      <Stars rating={restaurant.ratings[0].stars}/>
-                      </div>);
-      for (let i = 1; i < restaurant.ratings.length; i++) {
-        iwElements.push(<div style={{ color: '#EC9720' }} className="text-left mt-2">
-                        <Stars rating={restaurant.ratings[i].stars}/>
-                        </div>);
-        iwElements.push(<div className="text-left"> {
-                          '' + restaurant.ratings[i].comment + ''
-                          } </div>);
-
-      }
-    }
 
     return iwElements;
   };

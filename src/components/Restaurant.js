@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }from 'react';
 import { Stars } from './Stars';
 import GoogleReviews from './GoogleReviews';
 import { averageRatings } from './lib';
@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles (theme => ({
   card: {
     minWidth: 20,
+
   },
   title: {
     fontSize: 14,
@@ -35,7 +36,7 @@ const useStyles = makeStyles (theme => ({
 }));
 
 function Restaurant(props) {
-  const {id, place_id, name, address, key} = props.restaurant;
+  const {id, place_id, name, address} = props.restaurant;
 
   let avgRtg = averageRatings(props.restaurant);
   let comments = props.restaurant.ratings.map (function (ratings, index){
@@ -51,7 +52,8 @@ function Restaurant(props) {
               </span>
 
               <Typography variant="body2"
-                          component="p">
+                          component="p"
+                          style={{paddingBottom:"20px"}}>
                 {ratings.comment}
               </Typography>
             </div>);
@@ -63,7 +65,7 @@ function Restaurant(props) {
         props.onAddReview(input);
   }
 
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
   const classes = useStyles();
 
 
@@ -98,7 +100,7 @@ function Restaurant(props) {
                     <span>
                         ({!props.restaurant.isGooglePlaces &&
                             props.restaurant.ratings.length}
-                         {props.restaurant.isGooglePlaces &&
+                         {
                             props.restaurant.user_ratings_total}
                         )
                     </span>
@@ -120,7 +122,7 @@ function Restaurant(props) {
                           timeout="auto"
                           unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>{comments}</Typography>
+                    <Typography>{comments}</Typography>
 
                     {
                         props.restaurant.isGooglePlaces &&

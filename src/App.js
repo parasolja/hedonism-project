@@ -24,7 +24,7 @@ class App extends Component {
             googlePlaces: [],
             geoLat: null,
             geoLng: null,
-            
+
 
 
         };
@@ -83,15 +83,6 @@ class App extends Component {
             };
             service = new window.google.maps.places.PlacesService(document.getElementById('map'));
             service.nearbySearch(request, this.getGooglePlaces);
-            // service.getDetails({
-            //   placeId: 'ChIJpV48tgoosUcRwD26QHGATCY'
-            // }, (place, status) => {
-            //     if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-            //       console.log(place.reviews);
-            //       this.setState({places: place.reviews})
-            //     }
-            // })
-
 
             console.log('big success');
         } catch (err) {
@@ -217,13 +208,6 @@ class App extends Component {
                 <RestaurantsList
                     restaurants={this.state.restaurants.filter(this.inRange)}
                     onAddReview={this.handleAddReview}
-                    // {
-                    // ...places.map((place) => {
-                    //   if(place.rating >= 1){
-                    //     return <p key={place.id}>{place.text}</p>
-                    //   }
-                    // })
-                    // }
 
                 />
                   <MapContainer

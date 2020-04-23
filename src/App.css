@@ -25,10 +25,10 @@ h6 {
   position: absolute;
   top: 850px;
   left: 10px;
-  padding: 1rem;
+  padding: 20px;
   border-radius: 2px;
   width: auto;
-  min-width: 300px;
+  max-width: 450px;
   max-height: 88vh;
   overflow: scroll;
   background-color: white;
