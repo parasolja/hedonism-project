@@ -23,7 +23,7 @@ h6 {
 
 .restaurantList {
   position: absolute;
-  top: 850px;
+  top: 1000px;
   left: 10px;
   padding: 20px;
   border-radius: 2px;
@@ -46,10 +46,9 @@ ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  max-height: 700px;
+  max-height: 800px;
 
 }
-
 
 .btn-primary{
   background-color: #333333!important;
@@ -85,14 +84,20 @@ ul {
 }
 
 #map {
-
   height: 0px;
 }
 
 
 @media only screen and (max-width: 767px) {
   .restaurantList  {
-    top: 110px;
+    top: 500px;
+  }
+
+}
+
+@media only screen and (max-width: 700px) {
+  .restaurantList  {
+    top: 300px;
   }
 
 }

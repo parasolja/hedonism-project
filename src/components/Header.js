@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     const classes = useStyles();
     return (
     <div className={classes.root}>
-        <img src={main} alt='mainPhoto' id='header' height='700px' width='1300'/>
+        <img src={main} alt='mainPhoto' id='header' height='auto' width='100%'/>
     </div>
   );
 }
