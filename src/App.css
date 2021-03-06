@@ -50,6 +50,12 @@ ul {
 
 }
 
+#sectionHero {
+  background-position: 'center';
+  background-size: 'cover'; 
+  background-repeat: 'no-repeat';
+}
+
 .btn-primary{
   background-color: #333333!important;
 }

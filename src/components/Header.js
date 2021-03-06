@@ -1,24 +1,29 @@
-import React from 'react';
-import main from './img/header.png';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import {Grid} from '@material-ui/core';
+import Background from './img/hedonism.jpg';
 
+const sectionStyle = {
+  height: "100vh",
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
-  },
+  backgroundImage:
+  `url(${Background})`,
 
-}));
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+};
 
-  export default function Header () {
-    const classes = useStyles();
-    return (
-    <div className={classes.root}>
-        <img src={main} alt='mainPhoto' id='header' height='auto' width='100%'/>
-    </div>
+const Header = () => {
+  return (
+    <Grid style={sectionStyle}
+        container
+        direction="column"
+        justify="space-evenly"
+        alignItems="center"
+    >
+      <Grid item>
+      </Grid>
+    </Grid>
   );
-}
+};
+export default Header;
