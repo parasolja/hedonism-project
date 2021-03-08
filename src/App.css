@@ -50,6 +50,25 @@ ul {
 
 }
 
+.introduction {
+  width: 50%;
+  margin: 50px;
+  font-size: 18px;
+}
+
+.introductionPic {
+  width: auto;
+  margin: 50px;
+  display: block;
+  background-image: url('https://images.pexels.com/photos/5687/restaurant-coffee-morning-sugar.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-size: cover;
+  max-height: 400px;
+
+}
+
+
+
+
 #sectionHero {
   background-position: 'center';
   background-size: 'cover'; 
@@ -94,16 +113,16 @@ ul {
 }
 
 
-@media only screen and (max-width: 767px) {
+@media only screen (min-width: 750px) and (max-width: 900px){
   .restaurantList  {
-    top: 500px;
+    top: 1200px;
   }
 
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 600px) {
   .restaurantList  {
-    top: 300px;
+    top: 1000px;
   }
 
 }
